@@ -1,7 +1,7 @@
 !- Open this in CMB prg Studio!
 
-0 POKE53265,PEEK(53265)AND239:POKE53281,.:POKE53280,.
-1 DIMX(255):DIMY(255):S=54276
+0 DIMX(255):DIMY(255):S=54276
+1 POKE53265,PEEK(53265)AND239:POKE53281,.:POKE53280,.
 2 GOSUB1000
 
 !- C  = Address of top left corner of playfield in colour RAM
@@ -24,7 +24,7 @@
 !- TP = Index into X/Y array for  snake tail position
 !- E = Has eaten (needs to grow)?
 !- (Reenable screen after)
-4 DX=1:DY=.:X=3:Y=.:HP=L:TP=.:FORI=.TOL:X(I)=I:NEXT:E=.:POKE53265,PEEK(53265)OR16
+4 DX=1:DY=.:X=3:Y=.:HP=L:TP=.:FORI=.TOL:X(I)=I:Y(I)=.:NEXT:E=.:POKE53265,PEEK(53265)OR16
 
 !- Input handling. Prevent doubling back, because that is an unfair way to lose
 !- THENIF is faster than AND
@@ -66,30 +66,30 @@
 !- Game over. Turn the snake red starting from the tail end.
 100 FORI=1TOL:POKEC+X(TP)+Y(TP),2:TP=TP+1:IFTP>LTHENTP=0
 101 FORD=0TO9:NEXT:NEXT
-199 STOP
+199 GOTO1
 
 !- Draw, set up sound, return.
-1000 PRINT "{clear}{down}             {reverse on}{pink}{169}{reverse off}{yellow}{169} {reverse on}{127}{reverse off}  {reverse on}{cyan}{169}{light gray}{127}{reverse off} {reverse on}{pink} {reverse off}{169} {reverse on}{yellow} F"
-1002 PRINT ,"   {reverse on}{cyan}{169}{reverse off}{purple}{169} {reverse on}{yellow} {light green}{127}{reverse off} {reverse on}{cyan} {light gray} {reverse off} {reverse on}{purple} {127}{reverse off} {reverse on}{light green} {cyan}E"
-1004 PRINT " {white}UC{light green}F{yellow}F{cyan}R{green}FF{light blue}CI                    {white}UC{light green}F{yellow}F{cyan}R{green}FF{light blue}CI"
-1006 PRINT " {light green}B       {light blue}B                    {light green}B       {light blue}B"
-1008 PRINT " {yellow}H {cyan}sc{green}W{cyan}re {blue}G {white}U{light green}C{yellow}F{cyan}F{pink}F{orange}R{red}RRRRRRRFF{orange}F{pink}C{yellow}I H   {light green}w   {blue}G"
-1010 PRINT " {cyan}H       {blue}G {light green}B{black}QQQQQQQQQQQQQQQQ{yellow}B {cyan}H       {blue}G"
-1012 PRINT " {green}H       {blue}G {yellow}H{black}QQQQQQQQQQQQQQQQ{pink}G {light blue}Y {light green}a s d {blue}T"
-1014 PRINT " {green}B       {light blue}B {cyan}H{black}QQQQQQQQQQQQQQQQ{orange}G {light blue}Y       {blue}T"
-1016 PRINT " {light blue}JCD{blue}DED{light blue}DC{green}K {pink}H{black}QQQQQQQQQQQQQQQQ{red}G {green}H       {blue}G"
-1018 PRINT ," {orange}Y{black}QQQQQQQQQQQQQQQQ{red}T {green}H {yellow}eat {purple}Q {blue}G"
-1020 PRINT ," {red}Y{black}QQQQQQQQQQQQQQQQ{red}T {green}B       {blue}G"
-1022 PRINT ," {red}Y{black}QQQQQQQQQQQQQQQQ{red}T {light blue}JCD{blue}DEED{light blue}D{green}K"
-1024 PRINT ," {red}Y{black}QQQQQQQQQQQQQQQQ{red}T"
-1026 PRINT ," Y{black}QQQQQQQQQQQQQQQQ{red}T"
-1028 PRINT ," Y{black}QQQQQQQQQQQQQQQQ{red}T"
-1030 PRINT ," Y{black}QQQQQQQQQQQQQQQQ{red}T"
-1032 PRINT ," Y{black}QQQQQQQQQQQQQQQQ{orange}T"
-1034 PRINT ," {red}H{black}QQQQQQQQQQQQQQQQ{pink}G"
-1036 PRINT ," {orange}H{black}QQQQQQQQQQQQQQQQ{cyan}G"
-1038 PRINT ," {pink}H{black}QQQQQQQQQQQQQQQQ{yellow}G"
-1040 PRINT ," B{black}QQQQQQQQQQQQQQQQ{light green}B"
-1042 PRINT ," {yellow}J{pink}C{orange}D{red}DDEEEEEEE{orange}E{pink}D{cyan}D{yellow}D{light green}C{white}K"
-1044 POKES+20,15:POKES-4,.:POKES-3,2:POKES+1,18:POKES+2,.
-1046 RETURN
+500 PRINT "{clear}{down}             {reverse on}{pink}{169}{reverse off}{yellow}{169} {reverse on}{127}{reverse off}  {reverse on}{cyan}{169}{light gray}{127}{reverse off} {reverse on}{pink} {reverse off}{169} {reverse on}{yellow} F"
+502 PRINT ,"   {reverse on}{cyan}{169}{reverse off}{purple}{169} {reverse on}{yellow} {light green}{127}{reverse off} {reverse on}{cyan} {light gray} {reverse off} {reverse on}{purple} {127}{reverse off} {reverse on}{light green} {cyan}E"
+504 PRINT " {white}UC{light green}F{yellow}F{cyan}R{green}FF{light blue}CI                    {white}UC{light green}F{yellow}F{cyan}R{green}FF{light blue}CI"
+506 PRINT " {light green}B       {light blue}B                    {light green}B       {light blue}B"
+508 PRINT " {yellow}H {cyan}sc{green}W{cyan}re {blue}G {white}U{light green}C{yellow}F{cyan}F{pink}F{orange}R{red}RRRRRRRFF{orange}F{pink}C{yellow}I H   {light green}w   {blue}G"
+510 PRINT " {cyan}H       {blue}G {light green}B{black}QQQQQQQQQQQQQQQQ{yellow}B {cyan}H       {blue}G"
+512 PRINT " {green}H       {blue}G {yellow}H{black}QQQQQQQQQQQQQQQQ{pink}G {light blue}Y {light green}a s d {blue}T"
+514 PRINT " {green}B       {light blue}B {cyan}H{black}QQQQQQQQQQQQQQQQ{orange}G {light blue}Y       {blue}T"
+516 PRINT " {light blue}JCD{blue}DED{light blue}DC{green}K {pink}H{black}QQQQQQQQQQQQQQQQ{red}G {green}H       {blue}G"
+518 PRINT ," {orange}Y{black}QQQQQQQQQQQQQQQQ{red}T {green}H {yellow}eat {purple}Q {blue}G"
+520 PRINT ," {red}Y{black}QQQQQQQQQQQQQQQQ{red}T {green}B       {blue}G"
+522 PRINT ," {red}Y{black}QQQQQQQQQQQQQQQQ{red}T {light blue}JCD{blue}DEED{light blue}D{green}K"
+524 PRINT ," {red}Y{black}QQQQQQQQQQQQQQQQ{red}T"
+526 PRINT ," Y{black}QQQQQQQQQQQQQQQQ{red}T"
+528 PRINT ," Y{black}QQQQQQQQQQQQQQQQ{red}T"
+530 PRINT ," Y{black}QQQQQQQQQQQQQQQQ{red}T"
+532 PRINT ," Y{black}QQQQQQQQQQQQQQQQ{orange}T"
+534 PRINT ," {red}H{black}QQQQQQQQQQQQQQQQ{pink}G"
+536 PRINT ," {orange}H{black}QQQQQQQQQQQQQQQQ{cyan}G"
+538 PRINT ," {pink}H{black}QQQQQQQQQQQQQQQQ{yellow}G"
+540 PRINT ," B{black}QQQQQQQQQQQQQQQQ{light green}B"
+542 PRINT ," {yellow}J{pink}C{orange}D{red}DDEEEEEEE{orange}E{pink}D{cyan}D{yellow}D{light green}C{white}K"
+544 POKES+20,15:POKES-4,.:POKES-3,2:POKES+1,18:POKES+2,.
+546 RETURN
